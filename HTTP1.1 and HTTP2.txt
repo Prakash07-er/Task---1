@@ -1,0 +1,17 @@
+HTTP1.1:
+
+1. It will keeps all requests and responses in plain text format.
+2. It practically allows only one outstanding request per TCP connection
+3. This is the duplication of data across requests (cookies and other headers). Too many requests means too much redundant data, which would impact performance. (This led to the development of techniques like image sprites (combining multiple image requests into a single one) and domain-sharding (splitting the requests for resources over multiple domains to increase the number of possible parallel TCP connections)
+4. It has persistent connections and pipelining. (With persistent connections, HTTP/1.1 assumes that a TCP connection should be kept open unless directly told to close. This allows the client to send multiple requests along the same connection without waiting for a response to each, greatly improving the performance of HTTP/1.1 over HTTP/1.0.)
+
+
+HTTP2:
+
+1. HTTP/2 uses the binary framing layer to encapsulate all messages in binary format, while still maintaining HTTP semantics, such as verbs, methods, and headers.
+2. The conversion of messages into binary allows HTTP/2 to try new approaches to data delivery not available in HTTP/1.1
+3. In HTTP/2, the binary framing layer encodes requests/responses and cuts them up into smaller packets of information, greatly increasing the flexibility of data transfer.
+4. This allows more than one outstanding request, it still doesn’t solve the problem completely.
+5. Compressed headers, reduced data redundancy
+6. Instead of waiting for the client to request for assets like JS and CSS, the server can “push” the resources it believes would be required by the client. Avoids the round trip.
+
